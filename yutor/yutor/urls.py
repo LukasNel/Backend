@@ -22,8 +22,8 @@ from yutorapp.views import *
 router = routers.DefaultRouter()
 router.register(r'tutors', TutorViewSet)
 
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
 
 
 urlpatterns = [
