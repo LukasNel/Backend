@@ -18,19 +18,16 @@ class Tutor(models.Model):
     hourly_rate = models.FloatField()
     rating = models.FloatField()
     numRatings = models.IntegerField()
-<<<<<<< HEAD
-    availability = models.OneToMany(
-        Timeslot,
-        on_delete=models.CASCADE,
-    )
-=======
->>>>>>> fac8edcfd4074d9c2f46ed9bf1802603c09e724e
     subjects = models.OneToMany(
         Subject,
         on_delete=models.CASCADE,
     )
     bio = models.CharField(max_length=200)
 
+class Timeslot(models.Model):
+    start = models.DateTimeField('start time')
+    end = models.DateTimeField('end time')
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE,related_name="availability")
 
 class Timeslot(models.Model):
     start = models.DateTimeField('start time')
