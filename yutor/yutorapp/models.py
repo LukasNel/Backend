@@ -2,9 +2,6 @@ from django.db import models
 from django.conf import settings
 # Create your models here.
 
-class Timeslot(models.Model):
-    start = models.DateTimeField('start time')
-    end = models.DateTimeField('end time')
 
 class Tutor(models.Model):
     first_name = models.CharField(max_length=200, default = "")
@@ -18,16 +15,17 @@ class Tutor(models.Model):
     hourly_rate = models.FloatField()
     rating = models.FloatField()
     numRatings = models.IntegerField()
-    availability = models.OneToMany(
-        Timeslot;
-        on_delete=models.CASCADE,
-        
-    )
     subjects = models.OneToMany(
         models.CharField(max_length = 50),
         on_delete=models.CASCADE,
     )
     bio = models.CharField(max_length=200)
+
+
+class Timeslot(models.Model):
+    start = models.DateTimeField('start time')
+    end = models.DateTimeField('end time')
+    tutor = models.ForeignKey(Tutor,on_delete=models.CASCADE,related_name="availability")
 
 class Tutee(models.Model):
     first_name = models.CharField(max_length=200)
