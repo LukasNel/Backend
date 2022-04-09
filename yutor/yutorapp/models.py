@@ -5,7 +5,7 @@ from django.conf import settings
 # Create your models here.
 
 class Tutor(models.Model):
-    first_name = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=200, default = "")
     last_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
     picture = models.ImageField()
