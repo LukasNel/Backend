@@ -28,6 +28,10 @@ class Tutor(models.Model):
     )
     bio = models.CharField(max_length=200)
 
+class Timeslot(models.Model):
+    start = models.DateTimeField('start time')
+    end = models.DateTimeField('end time')
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE,related_name="availability")
 
 class Timeslot(models.Model):
     start = models.DateTimeField('start time')
