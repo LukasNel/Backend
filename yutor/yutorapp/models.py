@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User, Group
+from rest_framework import serializers
 from django.conf import settings
 # Create your models here.
 
@@ -21,3 +23,7 @@ class Tutor(models.Model):
 
     pub_date = models.DateTimeField('date published')
 
+class Request(models.Model):
+    Tutor = models.OneToOneField(Tutee)
+    zoom_link = models.urls()
+    time_requested = models.FloatField()
