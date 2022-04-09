@@ -57,6 +57,7 @@ class Request(models.Model):
     )
     zoom_link = models.urls()
     time_request = models.DateTimeField()
+    status = models.Integer()
 
 class TransactionTable(models.Model):
     Tutor = models.OneToOneField(
