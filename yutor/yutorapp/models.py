@@ -16,3 +16,8 @@ class Tutor(models.Model):
     rating = models.FloatField()
 
     pub_date = models.DateTimeField('date published')
+
+class Request(models.Model):
+    Tutor = models.OneToOneField(Tutee)
+    zoom_link = models.urls()
+    time_requested = models.FloatField()
