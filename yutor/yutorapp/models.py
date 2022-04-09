@@ -31,11 +31,6 @@ class Tutor(models.Model):
 class Timeslot(models.Model):
     start = models.DateTimeField('start time')
     end = models.DateTimeField('end time')
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE,related_name="availability")
-
-class Timeslot(models.Model):
-    start = models.DateTimeField('start time')
-    end = models.DateTimeField('end time')
     tutor = models.ForeignKey(Tutor,on_delete=models.CASCADE,related_name="availability")
 
 class Tutee(models.Model):
