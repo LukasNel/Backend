@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!-- Demonstrates CSS styling of a table -->
+
+<html lang="en">
+    <head>
+        <title>
+            Table
+        </title>
+        <!-- Imported this from bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            table
+            {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            td
+            {
+                border: 1px solid black;
+                padding: 5px;
+            }
+            
+            /* Here I added the img with brackets */
+            img
+            {
+                /* Standardized the height */
+                height: 175px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <table class="table">
+            <tr class="table-success">
+                <td><img src="https://cdn2.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png"></td>
+                <td><img src="https://cdn2.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png"></td>
+                <td><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png"></td>
+            </tr>
+            <tr class="table-danger">
+                <td><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"></td>
+                <td><img src="https://cdn2.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png"></td>
+                <td><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png"></td>
+            </tr>
+            <tr class="table-primary">
+                <td><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"></td>
+                <td><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png"></td>
+                <td><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png"></td>
+            </tr>
+        </table>
+    </body>
+</html>
