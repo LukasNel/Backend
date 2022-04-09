@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
      'rest_framework',
+     'rest_framework.authtoken',
 
 ]
 CORS_ORIGIN_WHITELIST = [
@@ -136,4 +137,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10, 
      'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
 }
