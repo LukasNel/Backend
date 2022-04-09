@@ -57,3 +57,17 @@ class Request(models.Model):
     )
     zoom_link = models.urls()
     time_request = models.DateTimeField()
+
+class TransactionTable(models.Model):
+    Tutor = models.OneToOneField(
+        Tutor,
+        on_delete=models.CASCADE,
+    )
+    Tutee = models.OneToOneField(
+        Tutee,
+        on_delete=models.CASCADE,
+    )
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    charge = models.FloatField()
+    duration = models.DateTimeField()
