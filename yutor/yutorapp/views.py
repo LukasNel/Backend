@@ -33,7 +33,7 @@ class TimeslotViewSet(viewsets.ModelViewSet):
     """
     queryset = Timeslot.objects.all()
     serializer_class = TimeslotSerializer
-    permission_classes = [permissions.IsAuthenticated]
+ #   permission_classes = [permissions.IsAuthenticated]
 
 
 
@@ -44,7 +44,7 @@ class TuteeViewSet(viewsets.ModelViewSet):
     """
     queryset  =Tutee.objects.all()
     serializer_class = TuteeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+ #   permission_classes = [permissions.IsAuthenticated]
 
 
 
@@ -55,7 +55,7 @@ class RequestViewSet(viewsets.ModelViewSet):
     """
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
-    permission_classes = [permissions.IsAuthenticated]
+ #   permission_classes = [permissions.IsAuthenticated]
 
 
 
@@ -66,9 +66,16 @@ class TransactionTableViewSet(viewsets.ModelViewSet):
     """
     queryset = TransactionTable.objects.all()
     serializer_class = TransactionTableSerializer
-    permission_classes = [permissions.IsAuthenticated]
+#    permission_classes = [permissions.IsAuthenticated]
 
 
+class RequestTimeslotViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = RequestTimeslot.objects.all()
+    serializer_class = RequestTimeslotSerializer
+#    permission_classes = [permissions.IsAuthenticated]
 
 
 

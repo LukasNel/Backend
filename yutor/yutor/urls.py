@@ -22,6 +22,12 @@ from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'tutors', TutorViewSet)
+router.register(r'subjects', SubjectViewSet)
+router.register(r'requests', RequestViewSet)
+router.register(r'timeslots', TimeslotViewSet)
+router.register(r'requesttimeslots', RequestTimeslotViewSet)
+router.register(r'tutees', TuteeViewSet)
+router.register(r'transactiontables', TransactionTableViewSet)
 
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
