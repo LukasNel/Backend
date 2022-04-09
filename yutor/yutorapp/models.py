@@ -6,6 +6,9 @@ class Timeslot(models.Model):
     start = models.DateTimeField('start time')
     end = models.DateTimeField('end time')
 
+class Subject(models.Model):
+    subject = models.CharField(max_length = 100)
+
 class Tutor(models.Model):
     first_name = models.CharField(max_length=200, default = "")
     last_name = models.CharField(max_length=200)
@@ -19,12 +22,11 @@ class Tutor(models.Model):
     rating = models.FloatField()
     numRatings = models.IntegerField()
     availability = models.OneToMany(
-        Timeslot;
+        Timeslot,
         on_delete=models.CASCADE,
-        
     )
     subjects = models.OneToMany(
-        models.CharField(max_length = 50),
+        Subject,
         on_delete=models.CASCADE,
     )
     bio = models.CharField(max_length=200)
