@@ -12,7 +12,7 @@
                 let correct = document.querySelectorAll('.correct');
                 correct.addEventListener('click', function() {
                     correct.style.backgroundColor = 'green';
-                    document.querySelector('#feedback1').innerHTML = 'Category chosen!';
+                    document.querySelector('#feedback1').innerHTML = 'Category chosen.';
                 });
 
                 let incorrects = document.querySelector('.incorrect');
@@ -24,15 +24,15 @@
                     });
                 }
 
-                document.querySelector('#check').addEventListener('click', function() {
+                document.querySelector('#Submit').addEventListener('click', function() {
                     let input = document.querySelector('input');
+                    while (input.value === null)
+                    {
+                        document.querySelector('#feedback2').innerHTML = 'Please enter words.';
+                    }
                     if (input.value !== null)
                     {
                         document.querySelector('#feedback2').innerHTML = 'Email Sent!';
-                    }
-                    else
-                    {
-                        document.querySelector('#feedback2').innerHTML = 'Please enter words.';
                     }
                 })
             });
@@ -63,8 +63,8 @@
                 <hr>
                 <!-- TODO: Add free response question here -->
                 <h3>How can we help?</h3>
-                <input type = "text"></input>
-                <button id="check">Check Answer</button>
+                <input type = "textarea"></input>
+                <button id="Submit">Check Answer</button>
                 <p id = "feedback2">  </p>
 
             </div>
