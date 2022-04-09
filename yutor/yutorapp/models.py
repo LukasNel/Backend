@@ -71,3 +71,4 @@ class TransactionTable(models.Model):
     end_time = models.DateTimeField()
     charge = models.FloatField()
     duration = models.DateTimeField()
+    status = models.Integer() # states: 1.finished, 2.scheduled, 3.pending 4.invalid
