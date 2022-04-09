@@ -40,3 +40,8 @@ class Tutee(models.Model):
 
     pub_date = models.DateTimeField('date published')
 
+class Request(models.Model):
+    Tutor = models.OneToOneField(Tutee)
+    zoom_link = models.urls()
+    time_request = models.DateTimeField()
+
