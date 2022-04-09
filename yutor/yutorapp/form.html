@@ -4,18 +4,18 @@
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
-        <title>Trivia!</title>
+        <title>Contact Us</title>
         <script>
             // TODO: Add code to check answers to questions
             // Run script when DOM is loaded
             document.addEventListener('DOMContentLoaded', function() {
-                let correct = document.querySelector('.correct');
+                let correct = document.querySelectorAll('.correct');
                 correct.addEventListener('click', function() {
                     correct.style.backgroundColor = 'green';
                     document.querySelector('#feedback1').innerHTML = 'Correct!';
                 });
 
-                let incorrects = document.querySelectorAll('.incorrect');
+                let incorrects = document.querySelector('.incorrect');
                 for (let i = 0; i < incorrects.length; i++)
                 {
                     incorrects[i].addEventListener('click', function() {
@@ -42,30 +42,29 @@
     </head>
     <body>
         <div class="header">
-            <h1>Trivia!</h1>
+            <h1>Contact Us</h1>
         </div>
 
         <div class="container">
             <div class="section">
-                <h2>Part 1: Multiple Choice </h2>
+                <h2>Contact Us</h2>
                 <hr>
                 <!-- TODO: Add multiple choice question here -->
-                <h3> What is the largest country in the world by area? </h3>
-                <button class="incorrect"> Finland </button>
-                <button class="incorrect"> United States </button> 
-                <button class="incorrect"> China </button> 
-                <button class="correct"> Russia </button> 
-                <button class="incorrect"> Brazil </button>
+                <h3>Please select a category.</h3>
+                <button class="correct"> Feedback </button>
+                <button class="correct"> Assistance </button> 
+                <button class="correct"> Concern </button> 
+                <button class="correct"> Pricing </button> 
 
                 <p id = "feedback1">  </p>
             
             </div>
 
             <div class="section">
-                <h2>Part 2: Free Response</h2>
+                <h2>Have your say:</h2>
                 <hr>
                 <!-- TODO: Add free response question here -->
-                <h3> What South American capital city is approximately antipodal to Kuala Lumpur? </h3>
+                <h3>How can we help?</h3>
                 <input type = "text"></input>
                 <button id="check">Check Answer</button>
                 <p id = "feedback2">  </p>
