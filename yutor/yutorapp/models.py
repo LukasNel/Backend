@@ -2,7 +2,13 @@ from django.db import models
 from django.conf import settings
 # Create your models here.
 
-
+# focus on last minute aspect
+# inclusivity issue (how to address?
+# have the FGLI tutees pay out of pocket first, then reinbursed by Yale later
+# cap on how much tutors can charge
+# cap on how often tutors can change price
+# tutors can charge more as their rating increases
+# set initial tutor price range
 class Subject(models.Model):
     subject = models.CharField(max_length = 100)
 
