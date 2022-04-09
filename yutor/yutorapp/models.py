@@ -2,6 +2,10 @@ from django.db import models
 from django.conf import settings
 # Create your models here.
 
+class Timeslot(models.Model):
+    start = models.DateTimeField('start time')
+    end = models.DateTimeField('end time')
+
 class Tutor(models.Model):
     first_name = models.CharField(max_length=200, default = "")
     last_name = models.CharField(max_length=200)
@@ -15,12 +19,13 @@ class Tutor(models.Model):
     rating = models.FloatField()
     numRatings = models.IntegerField()
     availability = models.OneToMany(
-        base_field = 
-        size = 
+        Timeslot;
+        on_delete=models.CASCADE,
+        
     )
     subjects = models.OneToMany(
-        base_field = models.CharField(max_length = 50),
-        size = 
+        models.CharField(max_length = 50),
+        on_delete=models.CASCADE,
     )
     bio = models.CharField(max_length=200)
 
@@ -37,8 +42,6 @@ class Tutee(models.Model):
     numRatings = models.IntegerField()
     bio = models.CharField(max_length=200)
 
-
-    pub_date = models.DateTimeField('date published')
 
 class Request(models.Model):
     Tutor = models.OneToOneField(
