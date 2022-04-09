@@ -95,3 +95,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+from django.http import JsonResponse
+import json
+
+def accept_request(request):
+    data = json.loads(request.body)
+    # do something with the your data
+    
+    # just return a JsonResponse
+    return JsonResponse(data)
