@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import TutorSerializer, UserSerializer, GroupSerializer
-from .models import Tutor
+from .serializers import *
+from .models import *
 
 class TutorViewSet(viewsets.ModelViewSet):
     """
@@ -13,7 +13,61 @@ class TutorViewSet(viewsets.ModelViewSet):
     """
     queryset = Tutor.objects.all()
     serializer_class = TutorSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+
+class SubjectViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+
+
+
+class TimeslotViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Timeslot.objects.all()
+    serializer_class = TimeslotSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+
+
+class TuteeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset  =Tutee.objects.all()
+    serializer_class = TuteeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+
+class RequestViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Request.objects.all()
+    serializer_class = RequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+
+class TransactionTableViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = TransactionTable.objects.all()
+    serializer_class = TransactionTableSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
 
 
 

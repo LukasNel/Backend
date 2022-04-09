@@ -18,6 +18,7 @@ from django.urls import include, path
 from django.urls import path
 from rest_framework import routers
 from yutorapp.views import *
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'tutors', TutorViewSet)
@@ -33,3 +34,5 @@ urlpatterns = [
 
 ]
 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
