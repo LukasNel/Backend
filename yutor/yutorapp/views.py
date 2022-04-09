@@ -4,7 +4,18 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import TutorSerializer
+from .models import Tutor
+
+class TutorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Tutor.objects.all()
+    serializer_class = TutorSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
 
 
 class UserViewSet(viewsets.ModelViewSet):

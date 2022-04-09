@@ -20,8 +20,10 @@ from rest_framework import routers
 from yutorapp.views import *
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'groups', GroupViewSet)
+router.register(r'tutors', TutorViewSet)
+
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 
 urlpatterns = [
