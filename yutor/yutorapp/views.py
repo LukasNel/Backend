@@ -1,3 +1,4 @@
+import time
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from datetime import datetime
@@ -29,7 +30,7 @@ class TutorViewSet(viewsets.ModelViewSet):
     """
     queryset = Tutor.objects.all()
     serializer_class = TutorSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class RatingViewSet(viewsets.ModelViewSet):
@@ -38,7 +39,7 @@ class RatingViewSet(viewsets.ModelViewSet):
     """
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class SubjectViewSet(viewsets.ModelViewSet):
@@ -47,7 +48,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class TimeslotViewSet(viewsets.ModelViewSet):
@@ -142,6 +143,10 @@ class EmailSet(APIView):
                 attendees=[request.Tutor.email, request.Tutee.email]
             )
             gc.add_event(event, send_updates=SendUpdatesMode.ALL,)
+            print(event)
+            print(event.id)
+
+            print(event.conference_solution.status)
             if event.conference_solution.status == 'success':
                 print(event.conference_solution.solution_id)
                 ts.zoom_link = event.conference_solution.entry_points[0].uri
@@ -217,9 +222,9 @@ class CheckTutor(APIView):
         except:
             pass
         payload = {"tutee": tutee_data,
-                         "tutor": tutor_data,
-                         "is_tutee": is_tutee,
-                         "is_tutor": is_tutor}
+                   "tutor": tutor_data,
+                   "is_tutee": is_tutee,
+                   "is_tutor": is_tutor}
         print("payload")
         print(payload)
         return Response(payload)
