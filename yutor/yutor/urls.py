@@ -19,6 +19,8 @@ from django.urls import path
 from rest_framework import routers
 from yutorapp.views import *
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
+
 
 router = routers.DefaultRouter()
 router.register(r'tutors', TutorViewSet)
@@ -38,6 +40,7 @@ urlpatterns = [
     path('', include(router.urls)),    
     path('accept_request/', EmailSet.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 
 ]
 
