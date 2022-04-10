@@ -26,10 +26,11 @@ router = routers.DefaultRouter()
 router.register(r'tutors', TutorViewSet)
 router.register(r'subjects', SubjectViewSet)
 router.register(r'requests', RequestViewSet)
+router.register(r'ratings', RatingViewSet)
 router.register(r'timeslots', TimeslotViewSet)
 router.register(r'requesttimeslots', RequestTimeslotViewSet)
 router.register(r'tutees', TuteeViewSet)
-router.register(r'transactiontables', TransactionTableViewSet)
+router.register(r'transactions', TransactionViewSet)
 
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
@@ -37,7 +38,10 @@ router.register(r'groups', GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('', include(router.urls)),    
+    path('accept_request/', EmailSet.as_view()),
+    path('check_tutor/', CheckTutor.as_view()),
+    path('finalize_request/', FinalizeReview.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 
