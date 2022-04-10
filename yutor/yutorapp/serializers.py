@@ -13,6 +13,10 @@ class RequestTimeslotSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+
+
+
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
@@ -38,10 +42,14 @@ class RequestSerializer(serializers.ModelSerializer):
         model = Request
         fields = ["timeslots", "tutor_done", "tutee_done",
                   "id", 'Tutor', 'Tutee', 'zoom_link', 'status']
-
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = '__all__'
 
 class TutorSerializer(serializers.ModelSerializer):
     requests = RequestSerializer(many=True, read_only=True)
+    subjects = SubjectSerializer(many=True, read_only=True)
     rating = serializers.SerializerMethodField('get_rating')
     
     def get_rating(self, obj):
@@ -57,6 +65,7 @@ class TutorSerializer(serializers.ModelSerializer):
         model = Tutor
         fields = ['id',
                   'requests',
+                  'subjects',
                   'first_name',
                   'last_name',
                   'email',
