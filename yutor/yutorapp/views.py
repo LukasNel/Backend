@@ -1,3 +1,5 @@
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from datetime import datetime
 from gcsa.conference import ConferenceSolutionCreateRequest, SolutionType
 from django.http import JsonResponse
@@ -21,14 +23,21 @@ from .models import *
 gc = GoogleCalendar(credentials_path='credentials.json')
 
 
-
-
 class TutorViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Tutor.objects.all()
     serializer_class = TutorSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+
+class RatingViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
 
@@ -68,12 +77,12 @@ class RequestViewSet(viewsets.ModelViewSet):
  #   permission_classes = [permissions.IsAuthenticated]
 
 
-class TransactionTableViewSet(viewsets.ModelViewSet):
+class TransactionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = TransactionTable.objects.all()
-    serializer_class = TransactionTableSerializer
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
 #    permission_classes = [permissions.IsAuthenticated]
 
 
@@ -94,8 +103,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 
-    
-
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -104,6 +111,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
 
 class EmailSet(APIView):
     """
@@ -130,10 +138,10 @@ class EmailSet(APIView):
                 conference_solution=ConferenceSolutionCreateRequest(
                     solution_type=SolutionType.HANGOUTS_MEET,
                 ),
-                
+
                 attendees=[request.Tutor.email, request.Tutee.email]
             )
-            gc.add_event(event,send_updates =SendUpdatesMode.ALL,)
+            gc.add_event(event, send_updates=SendUpdatesMode.ALL,)
             if event.conference_solution.status == 'success':
                 print(event.conference_solution.solution_id)
                 ts.zoom_link = event.conference_solution.entry_points[0].uri
@@ -142,6 +150,76 @@ class EmailSet(APIView):
                 print('Conference request has not been processed yet.')
             elif event.conference_solution.status == 'failure':
                 print('Conference request has failed.')
-        request.status="accepted"
+        request.status = "accepted"
         request.save()
-        return Response('Successfully sent to %s and %s' % (request.Tutor.email, request.Tutee.email) )
+        return Response('Successfully sent to %s and %s' % (request.Tutor.email, request.Tutee.email))
+
+
+class FinalizeReview(APIView):
+    """
+    View to finalize review
+    """
+
+    def post(self, request, format=None):
+        """
+        finalizes review.
+        takes:
+        {id:request.id}
+        """
+        data = json.loads(request.body)
+        # do something with the your data
+        print(data)
+        # just return a JsonResponse
+        request = Request.objects.get(id=data['id'])
+
+        request.status = "finalized"
+        request.save()
+        for ts in request.timeslots.all():
+            newtransaction = Transaction()
+            newtransaction.requesttimeslot = ts
+            diff = (ts.end - ts.start)
+            days, seconds = diff.days, diff.seconds
+            hours = days * 24 + seconds // 3600
+            newtransaction.charge = hours*request.Tutor.hourly_rate
+            newtransaction.tutor = request.Tutor
+            newtransaction.save()
+        return Response('Successfully saved transaction')
+
+
+class CheckTutor(APIView):
+    """
+    View to finalize review
+    """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        """
+        check if tutor.
+        takes:
+        {token:token}
+        """
+        user = request.user
+        is_tutor = False
+        is_tutee = False
+        tutor_data = {}
+        tutee_data = {}
+        try:
+            tut = Tutor.objects.get(user=user)
+            tutee_data = TutorSerializer(tut).data
+            is_tutor = True
+        except:
+            pass
+        try:
+            tutee = Tutee.objects.get(user=user)
+            is_tutee = True
+            tutee_data = TuteeSerializer(tutee).data
+        except:
+            pass
+        payload = {"tutee": tutee_data,
+                         "tutor": tutor_data,
+                         "is_tutee": is_tutee,
+                         "is_tutor": is_tutor}
+        print("payload")
+        print(payload)
+        return Response(payload)

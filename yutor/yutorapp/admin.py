@@ -24,6 +24,10 @@ class TimeslotAdmin(admin.ModelAdmin):
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
     pass
-@admin.register(TransactionTable)
-class TransactionTable(admin.ModelAdmin):
+@admin.register(Transaction)
+class Transaction(admin.ModelAdmin):
+    pass
+
+@admin.register(Rating)
+class Rating(admin.ModelAdmin):
     pass
