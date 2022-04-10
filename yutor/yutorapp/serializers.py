@@ -10,6 +10,9 @@ class RequestTimeslotSerializer(serializers.ModelSerializer):
 
 
 class RequestSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        kwargs['partial'] = True
+        super(RequestSerializer, self).__init__(*args, **kwargs)
     timeslots = RequestTimeslotSerializer(many=True)
 
     def create(self, validated_data):
@@ -23,7 +26,7 @@ class RequestSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Request
-        fields = ["timeslots",'Tutor','Tutee','zoom_link', 'status']
+        fields = ["timeslots","tutor_done","tutee_done","id",'Tutor','Tutee','zoom_link', 'status']
 
 
 class TutorSerializer(serializers.ModelSerializer):

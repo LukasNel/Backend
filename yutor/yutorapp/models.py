@@ -68,12 +68,15 @@ class Request(models.Model):
     ]
     zoom_link = models.URLField()
     status = models.CharField(choices=STATUS_CHOICES,default="pending",max_length=200, null=True, blank=True)
-
+    tutor_done=models.BooleanField(default=False)
+    tutee_done=models.BooleanField(default=False)
 
 
 class RequestTimeslot(models.Model):
     start = models.DateTimeField('start time')
     end = models.DateTimeField('end time')
+    zoom_link = models.URLField()
+
     request = models.ForeignKey(
         Request,null=True, on_delete=models.CASCADE, related_name="timeslots")
 
