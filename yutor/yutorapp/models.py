@@ -35,17 +35,13 @@ class Tutor(models.Model):
         return self.first_name + ' ' + self.last_name
 
 
-class Subject(models.Model):
-    subject = models.CharField(max_length=100)
-    tutor = models.ForeignKey(
-        Tutor, on_delete=models.CASCADE, related_name="subjects")
-
 
 class Timeslot(models.Model):
     start = models.DateTimeField('start time')
     end = models.DateTimeField('end time')
     tutor = models.ForeignKey(
         Tutor, on_delete=models.CASCADE, related_name="timeslots")
+
 
 
 class Tutee(models.Model):
@@ -64,6 +60,11 @@ class Tutee(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
+class Subject(models.Model):
+    def __str__(self) -> str:
+        return self.subject_name + ' - ' + str(self.tutor)
+    subject_name = models.CharField(max_length=200, default="")
+    tutor=models.ForeignKey(Tutor,on_delete=models.CASCADE, related_name="subjects" )
 
 class Request(models.Model):
     Tutor = models.ForeignKey(
