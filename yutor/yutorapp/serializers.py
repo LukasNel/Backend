@@ -1,6 +1,10 @@
 from django.contrib.auth.models import User, Group
+from django.contrib.auth import get_user_model # If used custom user model
+
 from rest_framework import serializers
 from .models import *
+
+UserModel = get_user_model()
 
 
 class RequestTimeslotSerializer(serializers.ModelSerializer):
@@ -58,9 +62,16 @@ class TransactionTableSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        user = UserModel.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+        )
+        return user
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'email', 'groups','password']
 
 
 class GroupSerializer(serializers.ModelSerializer):

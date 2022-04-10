@@ -4,8 +4,12 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.generics import CreateAPIView
+
 from .serializers import *
 from .models import *
+
+
 
 class TutorViewSet(viewsets.ModelViewSet):
     """
@@ -85,7 +89,9 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+
+    
 
 
 class GroupViewSet(viewsets.ModelViewSet):
