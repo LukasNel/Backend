@@ -8,9 +8,13 @@ class RequestAdmin(admin.ModelAdmin):
     inlines = (RequestTimeslotAdminInline, )
 
     pass
+class SubjectAdminInline(admin.TabularInline):
+    model = Subject
 
 @admin.register(Tutor)
 class TutorAdmin(admin.ModelAdmin):
+    inlines = (SubjectAdminInline, )
+
     pass
 @admin.register(Tutee)
 class TuteeAdmin(admin.ModelAdmin):
@@ -24,6 +28,10 @@ class TimeslotAdmin(admin.ModelAdmin):
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
     pass
-@admin.register(TransactionTable)
-class TransactionTable(admin.ModelAdmin):
+@admin.register(Transaction)
+class Transaction(admin.ModelAdmin):
+    pass
+
+@admin.register(Rating)
+class Rating(admin.ModelAdmin):
     pass
